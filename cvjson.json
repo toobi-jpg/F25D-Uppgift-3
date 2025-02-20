@@ -1,0 +1,36 @@
+{
+  "ARBETSLIVSERFARENHET": [
+    {
+      "titel": "Lånemäklare",
+      "företag": "Koll, Låna Bra i Sverige AB",
+      "år": "2021 - 2023"
+    },
+    {
+      "titel": "Musikproducent",
+      "företag": "Lezter AB",
+      "år": "2018 - nutid"
+    },
+    {
+      "titel": "Butiksbiträde",
+      "företag": "Ica Supermarket",
+      "år": "2016 - 2017"
+    }
+  ],
+  "UTBILDNING": [
+    {
+      "skola": "Borås yrkeshögskola",
+      "program": "Frontend Utvecklare React",
+      "år": "2025 - 2027"
+    },
+    {
+      "skola": "Vallentuna gymnasium",
+      "program": "Handels och Administration",
+      "år": "2016 - 2018"
+    },
+    {
+      "skola": "Energigymnasiet Upplands Väsby",
+      "program": "VVS- och fastighetsprogrammet",
+      "år": "2014 - 2015"
+    }
+  ]
+}

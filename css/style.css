@@ -1,0 +1,921 @@
+/* Om jag gjorde om sidan från och med idag hade jag skapat och delat upp css i olika filer för olka sidor så att koden inte blir så klumpig. */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --base-color: #0a0a0a;
+  --text-color: #cac6c0;
+  --text-accent: #ffffff;
+  --card-gradient: linear-gradient(to top right, #0a0a0a, #0a0a0a, #0b1318);
+  --card-elements: #272624;
+  --input-color: #1a1a1a;
+  --text-placeholder: rgba(255, 255, 255, 0.4);
+  --base-header: #1a1a1a;
+  --darker-header-color: #0a0a0a;
+  --icon-fill: #ffffff;
+  --text-shadow: rgba(255, 255, 255, 0.596);
+  --border-color: #ffffff1e;
+  --btn-color: #272624;
+}
+
+/* Har inte lagt ned så mycket tid på självaste färgerna för lightmode utan för det mesta funktionen i sig.*/
+.lightmode {
+  --base-color: #414141;
+  --text-color: #000000;
+  --text-accent: #797979;
+  --card-gradient: linear-gradient(71deg, #eeeeee, #eeeeee, #eeeeee7b);
+  --card-elements: #e2f9ff;
+  --input-color: #e6e6e6;
+  --text-placeholder: #000000;
+  --base-header: #eeeeee;
+  --darker-header-color: #cecece;
+  --icon-fill: #000000;
+  --text-shadow: rgba(0, 0, 0, 0.234);
+  --border-color: #00000057;
+  --btn-color: #e2f9ff;
+}
+
+html {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  background-color: var(--base-color);
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Raleway", serif;
+  letter-spacing: 1px;
+  min-height: 0;
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--base-header);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 4rem;
+}
+
+.hamburger {
+  position: absolute;
+  left: 20px;
+  display: none !important;
+}
+
+#theme-switch {
+  right: 20px;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--darker-header-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+#theme-switch svg {
+  fill: var(--text-color);
+  transition: opacity 0.3s ease;
+}
+
+#theme-switch svg:first-child {
+  display: block;
+}
+
+#theme-switch svg:last-child {
+  display: none;
+}
+
+.darkmode #theme-switch svg:first-child {
+  display: none;
+}
+
+.darkmode #theme-switch svg:last-child {
+  display: block;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  gap: 30px;
+}
+
+.menu a {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+
+.menu a:hover {
+  color: var(--text-accent);
+}
+
+.active {
+  color: var(--text-accent) !important;
+  text-shadow: 0px 0px 4px var(--text-shadow);
+}
+
+nav img {
+  cursor: pointer;
+  right: 30px;
+  position: absolute;
+  height: 30px;
+}
+
+#obs-text {
+  position: absolute;
+  right: 5%;
+  margin-right: 25px;
+  color: var(--text-accent);
+  font-weight: 500;
+  display: none;
+  font-size: 12px;
+}
+
+.hamburger-menu.show {
+  display: flex;
+}
+
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 350px;
+  background-color: var(--darker-header-color);
+  gap: 40px;
+  border-bottom: 1px solid var(--input-color);
+}
+
+.hamburger-menu a {
+  font-weight: 500;
+  margin-top: 10px;
+  font-size: 32px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+@media (min-width: 499px) {
+  .hamburger-menu {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .menu a {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  footer a {
+    font-size: 12px;
+  }
+}
+
+#popup-div-background {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+  backdrop-filter: blur(3px);
+}
+
+#popup-div i {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  z-index: 1000;
+  color: var(--text-accent);
+  cursor: pointer;
+}
+
+#popup-div {
+  position: fixed;
+  display: flex;
+  flex: 1;
+  margin: 0 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80%;
+  width: 1000px;
+  border: 1px solid var(--border-color);
+  background: var(--card-gradient);
+  border-radius: 15px;
+  z-index: 999;
+  color: var(--text-color);
+}
+
+.grid-popup-layout {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-row: auto auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  align-items: center;
+}
+
+.grid-popup-layout div {
+  border: 1px solid red;
+  padding: 20px;
+  border-radius: 15px;
+  height: 85%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.grid-popup-layout ul {
+  color: var(--text-color);
+  margin-top: 20px;
+}
+
+.grid-popup-layout li {
+  margin: 10px 0;
+}
+
+main {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  margin: 0 auto;
+}
+
+main div {
+  color: rgb(0, 0, 0);
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 40px;
+  height: 440px;
+  width: 560px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.ppbox {
+  position: relative;
+  background-color: var(--card-gradient);
+}
+
+.ppbox img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.cvtextbox {
+  position: relative;
+  padding: 15px;
+  line-height: 1.4rem;
+  color: var(--text-color);
+  background: var(--card-gradient);
+  overflow: hidden;
+}
+
+.techstackicons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 1px;
+  box-shadow: none;
+  width: 50%;
+  height: 2rem;
+  gap: 10px;
+  margin-top: 30px;
+  opacity: 100%;
+  border: none;
+}
+
+.linebreaker {
+  background-color: var(--text-color);
+  opacity: 50%;
+  box-shadow: none;
+  margin-left: 1px;
+  height: 0.2rem;
+  width: 80px;
+  margin-top: 30px;
+}
+
+.cvtextbox p {
+  margin-top: 30px;
+  width: 90%;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.cvtextbox span {
+  letter-spacing: 3px;
+  color: #74c0fc;
+}
+
+.cvtextbox h3 {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.cvtextbox a {
+  font-weight: bold;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.cvtextbox a:hover {
+  color: var(--text-accent);
+}
+
+/* Kanterna på bilden blir dålig kvalité vid nerskalning. Provat image-sharpening men fick det inte att funka. */
+/* Hittade inte heller någon svg som passade bra */
+.bluewavesimg {
+  position: absolute;
+  left: 0;
+  bottom: -130px;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  opacity: 60%;
+}
+
+@media (max-width: 414px) {
+  .bluewavesimg {
+    bottom: -160px;
+  }
+}
+
+.projects {
+  position: absolute;
+  font-weight: 400;
+  color: var(--text-color);
+  font-size: 42px;
+  z-index: 1;
+  bottom: -75px;
+  left: 0px;
+  text-shadow: 0px 0px 4px var(--text-color);
+}
+
+/* Denna sektion hade jag förmodligen gjort i en grid layout om jag gjorde om den */
+section {
+  position: relative;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  max-width: 1245px;
+  gap: 30px;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 12%;
+}
+
+section div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 265px;
+  height: 360px;
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: transform 0.2s ease;
+  background: var(--card-gradient);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.section-div-background {
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+section h2 {
+  color: #cac6c0;
+  position: absolute;
+  bottom: 70px;
+  align-items: flex-start;
+  text-align: center;
+  width: 100%;
+  font-weight: 500;
+  text-transform: uppercase;
+  z-index: 3;
+  text-shadow: 0px 0px 4px var(--text-shadow);
+}
+
+.cardWaves {
+  position: absolute;
+  z-index: 2;
+  object-fit: cover;
+  height: 50%;
+  width: 400px;
+  left: -130px;
+  bottom: -40px;
+  transition: transform 0.7s ease-in-out;
+}
+
+.card1 {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid var(--border-color);
+}
+
+/* Kommer lägga till fler projekt till uppgift 3, något projekt jag håller på med och kanske lorem. */
+section div .project-img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.8s ease;
+}
+
+section div:hover .project-img {
+  transform: scale(1.1);
+}
+section div:hover .cardWaves {
+  transform: translateX(120px);
+}
+section div:hover .readmore {
+  transform: translateX(140px);
+}
+section div:hover .section-div-background {
+  opacity: 100%;
+}
+
+.readmore {
+  position: absolute;
+  left: -120px;
+  bottom: 5px;
+  display: flex;
+  justify-content: center;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 5px;
+  background-color: var(--card-elements);
+  width: 40%;
+  height: 2rem;
+  margin-bottom: 5%;
+  border-radius: 5px;
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.341);
+  transition: color 0.4s ease;
+  border: 1px solid var(--border-color);
+  z-index: 2;
+  transition: transform 0.7s ease-in-out;
+}
+
+#githubiconsmall {
+  justify-self: center;
+  align-self: center;
+  margin-right: 5px;
+}
+
+.readmore:hover {
+  cursor: pointer;
+  color: var(--text-accent);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--base-header);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 6rem;
+  margin-top: 60px;
+  gap: 40px;
+}
+
+footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+footer a i {
+  margin-right: 5px;
+  color: var(--text-color);
+  transition: color 0.4s ease;
+}
+
+footer a:hover i {
+  color: var(--text-accent);
+}
+
+footer a:has(i:hover) label {
+  color: var(--text-accent);
+}
+
+footer label:hover {
+  cursor: pointer;
+  color: var(--text-accent);
+}
+
+footer label {
+  color: var(--text-color);
+  transition: color 0.4s ease;
+}
+
+@media (max-width: 1179px) {
+  section {
+    max-width: 809px;
+  }
+
+  section div {
+    width: 260px;
+    height: 360px;
+  }
+
+  .projects {
+    bottom: -555px;
+  }
+}
+
+@media (max-width: 589px) {
+  section {
+    max-width: 589px;
+    padding: 0px 20px;
+  }
+
+  section div {
+    width: 539px;
+    height: 400px;
+  }
+
+  section div:hover .readmore {
+    transform: none;
+  }
+
+  section h2 {
+    background-color: var(--input-color);
+    height: 30%;
+    bottom: 0;
+    z-index: 2;
+    border-top: 1px solid var(--border-color);
+    padding-top: 10px;
+  }
+
+  .readmore {
+    min-width: 100px;
+    width: 40%;
+    left: 20px;
+  }
+
+  .cardWaves {
+    display: none;
+  }
+}
+
+@media (max-width: 499px) {
+  .menu {
+    display: none;
+  }
+
+  .hamburger {
+    display: block !important;
+  }
+}
+
+.contact-page main {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--base-color);
+  min-height: 100vh;
+  overflow: hidden;
+  align-items: flex-start;
+  margin-top: 50px;
+}
+
+.contact-page-main img {
+  position: absolute;
+  z-index: 0;
+  width: 800px;
+  height: auto;
+  object-fit: cover;
+  opacity: 23%;
+  margin-top: -100px;
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  box-shadow: none;
+  z-index: 1;
+  border: none;
+  max-width: 300px;
+  gap: 20px;
+  overflow: hidden;
+  color: var(--text-color);
+  font-family: "Lato", serif;
+  text-shadow: 0px 0px 2px var(--text-shadow);
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+}
+
+.left-container.show {
+  opacity: 100%;
+}
+
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 0px;
+  height: 25px;
+  width: 100px;
+  border: none;
+}
+
+.contact-icons i {
+  color: var(--text-color);
+}
+
+.contact-icons i:hover {
+  color: var(--text-accent);
+}
+
+.contact-container {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  max-width: 300px;
+  right: 40px;
+}
+
+.contact-container h1 {
+  color: var(--text-color);
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.368);
+}
+
+.contact-container p {
+  color: var(--text-color);
+  line-height: 5px;
+  text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.368);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 300px;
+  margin-top: 40px;
+}
+
+input {
+  width: 100%;
+  height: 2.5rem;
+  border: none;
+  padding: 10px;
+  background-color: var(--input-color);
+  color: var(--text-color);
+  font-weight: 500;
+  border-radius: 15px;
+  flex: 1;
+}
+
+#message {
+  border: none;
+  width: 100%;
+  border-radius: 15px;
+  height: 6rem;
+  padding: 10px;
+  resize: none;
+  font-weight: 500;
+  background-color: var(--input-color);
+  border-radius: 15px;
+}
+
+textarea {
+  color: var(--text-color);
+  font-weight: 500;
+  font-family: "Raleway", serif;
+}
+
+textarea::placeholder {
+  font-family: "Raleway", serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-placeholder);
+}
+
+input::placeholder {
+  font-family: "Raleway", serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-placeholder);
+  padding-left: 25px;
+}
+
+input:focus::placeholder {
+  color: var(--text-color);
+}
+
+input:focus {
+  border: none;
+  outline: none;
+}
+
+textarea:focus::placeholder {
+  color: var(--text-color);
+}
+
+textarea:focus {
+  border: none;
+  outline: none;
+}
+
+.sendbutton {
+  font-size: 14px;
+  cursor: pointer;
+  background-image: var(--base-color);
+  color: var(--text-color);
+  transition: color 0.4s ease, font-size 0.4s ease;
+}
+
+.sendbutton:hover {
+  background-image: linear-gradient(to bottom right, #3c3b39, #33312f, #1a171c);
+  font-size: 14px;
+  color: white;
+}
+
+.idcard {
+  position: absolute;
+  opacity: 30%;
+  height: 17px;
+  flex-shrink: 0;
+  margin-top: 7px;
+  margin-left: -260px;
+  fill: var(--icon-fill);
+}
+
+form:has(#fullnameinput:focus) .idcard {
+  display: none;
+}
+
+.envelope {
+  position: absolute;
+  opacity: 30%;
+  height: 17px;
+  flex-shrink: 0;
+  margin-top: 68px;
+  margin-left: -261px;
+  fill: var(--icon-fill);
+}
+
+form:has(#emailinput:focus) .envelope {
+  display: none;
+}
+
+/* Väldigt nöjd med denna knapp. Hade sparat denna design i en knapp "variabel" och använt på fler knappar på sidan */
+#cvbtn {
+  margin-top: 30px;
+  gap: 5px;
+  display: flex;
+  padding: 10px 20px;
+  background-color: var(--btn-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  width: 80px;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+#cvbtn:hover {
+  background-color: var(--input-color);
+  color: var(--text-accent);
+}
+
+#cvbtn::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -30px;
+  width: 1px;
+  height: 60px;
+  background-color: transparent;
+  box-shadow: -10px 0px 8px var(--text-shadow);
+  transform: rotate(45deg);
+  animation: moveFlash 3s infinite;
+}
+
+@keyframes moveFlash {
+  0% {
+    left: -30px;
+  }
+  50% {
+    left: 140%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+.aboutme-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  margin-top: 40px;
+  margin-bottom: 22%;
+  height: 540px;
+  width: 760px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  padding: 15px;
+  line-height: 1.4rem;
+  color: var(--text-color);
+  background: var(--card-gradient);
+}
+
+.aboutme-div h2 {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.aboutme-div span {
+  letter-spacing: 3px;
+  color: #74c0fc;
+}
+
+.aboutme-div h3 {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-color);
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.portfolio main div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 40px;
+  margin-bottom: 22%;
+  height: 540px;
+  width: 760px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  padding: 15px;
+  line-height: 1.4rem;
+  color: var(--text-color);
+  background: var(--card-gradient);
+}
