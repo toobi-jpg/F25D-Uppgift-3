@@ -197,7 +197,7 @@ nav img {
   width: 100%;
   height: 100%;
   z-index: 998;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
 }
 
 #popup-div i {
@@ -218,19 +218,46 @@ nav img {
   left: 50%;
   transform: translate(-50%, -50%);
   height: 80%;
-  width: 1000px;
+  width: 80%;
+  max-width: 1000px;
+  min-width: 320px;
   border: 1px solid var(--border-color);
   background: var(--card-gradient);
   border-radius: 15px;
   z-index: 999;
   color: var(--text-color);
+  overflow-y: auto;
+}
+
+@media (max-width: 1000px) {
+  #popup-div {
+    width: 98%;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid-popup-layout {
+    grid-template-columns: 1fr !important;
+    margin-left: 0px !important;
+  }
+}
+
+@media (max-width: 365px) {
+  .grid-popup-layout dt {
+    font-size: 16px !important;
+  }
+
+  .grid-popup-layout dd {
+    font-size: 12px !important;
+  }
 }
 
 .grid-popup-layout {
+  margin-left: 60px;
   display: grid;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 40px;
   grid-template-columns: 1fr 1fr;
   grid-row: auto auto;
   grid-column-gap: 20px;
@@ -239,24 +266,69 @@ nav img {
 }
 
 .grid-popup-layout div {
-  border: 1px solid red;
-  padding: 20px;
+  margin-top: 60px;
   border-radius: 15px;
-  height: 85%;
-  color: #fff;
+  height: 100%;
+  color: var(--text-accent);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  box-sizing: border-box;
 }
 
-.grid-popup-layout ul {
-  color: var(--text-color);
-  margin-top: 20px;
+.grid-popup-layout h3 {
+  font-size: 28px;
+  font-weight: 500;
+  text-transform: uppercase;
+  z-index: 1001;
 }
 
-.grid-popup-layout li {
-  margin: 10px 0;
+.popup-linebreaker {
+  background-color: var(--text-color);
+  opacity: 50%;
+  box-shadow: none;
+  height: 0.2rem !important;
+  width: 100px;
+  margin-top: 60px;
+  z-index: 1001;
+}
+
+.grid-popup-layout dl {
+  color: var(--text-accent);
+}
+
+.grid-popup-layout dt {
+  margin-top: 60px;
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+  display: flex;
+}
+
+.grid-popup-layout dd {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+dt span {
+  color: rgb(0, 255, 0);
+  font-size: 12px;
+  margin-left: 10px;
+  margin-top: 6px;
+  animation: blink 3s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
 
 main {

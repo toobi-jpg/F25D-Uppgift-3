@@ -93,25 +93,53 @@ if (cvbtn) {
 async function popupData() {
   const cvjson = await getData();
 
-  const utbildningarUl = document.getElementById("Utbildningar-list");
-  const arbeteUl = document.getElementById("Arbete-list");
+  const utbildningarDl = document.getElementById("Utbildningar-list");
+  const arbeteDl = document.getElementById("Arbete-list");
 
-  utbildningarUl.innerHTML = "";
-  arbeteUl.innerHTML = "";
+  utbildningarDl.innerHTML = "";
+  arbeteDl.innerHTML = "";
 
   if (cvjson.UTBILDNING) {
-    cvjson.UTBILDNING.forEach((item) => {
-      const li = document.createElement("li");
-      li.textContent = `${item.skola} - ${item.program} (${item.år})`;
-      utbildningarUl.appendChild(li);
+    cvjson.UTBILDNING.forEach((item, index) => {
+      const dt = document.createElement("dt");
+      const dd = document.createElement("dd");
+
+      dt.textContent = `${item.skola}`;
+      dd.textContent = `${item.program} (${item.år})`;
+
+      dt.id = `utbildning-text-${index}`;
+      dd.id = `utbildning-text-${index}`;
+
+      utbildningarDl.appendChild(dt);
+      utbildningarDl.appendChild(dd);
+
+      if (index === 0) {
+        const span = document.createElement("span");
+        span.textContent = "Aktiv";
+        dt.appendChild(span);
+      }
     });
   }
 
   if (cvjson.ARBETSLIVSERFARENHET) {
-    cvjson.ARBETSLIVSERFARENHET.forEach((job) => {
-      const li = document.createElement("li");
-      li.textContent = `${job.titel} - ${job.företag} (${job.år})`;
-      arbeteUl.appendChild(li);
+    cvjson.ARBETSLIVSERFARENHET.forEach((job, index) => {
+      const dt = document.createElement("dt");
+      const dd = document.createElement("dd");
+
+      dt.textContent = `${job.titel}`;
+      dd.textContent = `${job.företag} (${job.år})`;
+
+      dt.id = `arbete-text-${index}`;
+      dd.id = `arbete-text-${index}`;
+
+      arbeteDl.appendChild(dt);
+      arbeteDl.appendChild(dd);
+
+      if (index === 0) {
+        const span = document.createElement("span");
+        span.textContent = "Aktiv";
+        dt.appendChild(span);
+      }
     });
   }
 }
