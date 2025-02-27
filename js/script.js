@@ -134,12 +134,6 @@ async function popupData() {
 
       arbeteDl.appendChild(dt);
       arbeteDl.appendChild(dd);
-
-      if (index === 0) {
-        const span = document.createElement("span");
-        span.textContent = "Aktiv";
-        dt.appendChild(span);
-      }
     });
   }
 }
@@ -150,3 +144,33 @@ async function getData() {
 
   return data;
 }
+
+const forwardBtn = document.getElementById("arrow-forward");
+const backBtn = document.getElementById("arrow-back");
+const project = document.querySelectorAll(".project-select");
+const dot = document.querySelectorAll(".dot");
+let slidecounter = 0;
+activeProject();
+
+function activeProject() {
+  project.forEach((e) => e.classList.remove("showproject"));
+  project[slidecounter].classList.add("showproject");
+  dot.forEach((e) => e.classList.remove("activedot"));
+  dot[slidecounter].classList.add("activedot");
+}
+
+forwardBtn.addEventListener("click", () => {
+  slidecounter++;
+  if (slidecounter >= project.length) {
+    slidecounter = 0;
+  }
+  activeProject();
+});
+
+backBtn.addEventListener("click", () => {
+  slidecounter--;
+  if (slidecounter < 0) {
+    slidecounter = project.length - 1;
+  }
+  activeProject();
+});
