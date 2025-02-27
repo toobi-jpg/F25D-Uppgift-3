@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
@@ -20,6 +24,7 @@
       rel="stylesheet"
     />
     <script src="./js/script.js" defer></script>
+    <script src="./js/drawcanvas.js" defer></script>
     <title>Kevin WL CW Portfolio</title>
   </head>
   <body class="portfolio">
@@ -69,7 +74,6 @@
     </div>
     <main>
       <div class="project-page-div-1">
-        <h1>Projekt</h1>
         <div class="project-page-project-container">
           <div class="project-select project-container-project1 showproject">
             <img
@@ -82,7 +86,7 @@
               <p>
                 Min första hemsida! Sidans funktionellitet är inte inlagd då
                 uppgiften endast var att skapa HTML layout med CSS design. Kolla
-                in min kod på Github.
+                in min kod på Github!
               </p>
               <a
                 class="project-page-readmore"
@@ -93,7 +97,30 @@
               >
             </div>
           </div>
-          <div class="project-select project-container-project2"></div>
+          <div class="project-select project-container-project2">
+            <div class="canvas-container">
+              <i id="resetCanvas" class="fa-solid fa-trash-can fa-lg"></i>
+              <i id="saveImage" class="fa-solid fa-file-image fa-lg"></i>
+              <canvas id="drawingCanvas"></canvas>
+            </div>
+            <div class="project-container-project2-rightside">
+              <h2>Canvas Drawing</h2>
+              <p class="canvas-p">
+                Ett miniprojekt med flertal funktioner, DOM & kordination
+                manipulation.
+              </p>
+              <div class="canvas-controls">
+                <input id="drawColor" type="color" value="#ffffff" />
+                <input type="range" min="1" max="40" id="widthRange" />
+                <p id="widthText"></p>
+              </div>
+              <img
+                class="drawingHand"
+                src="./images/drawingHand.png"
+                alt="drawing hand png"
+              />
+            </div>
+          </div>
         </div>
         <div class="project-container-slider-dots">
           <i class="dot fa-solid fa-circle fa-2xs"></i>

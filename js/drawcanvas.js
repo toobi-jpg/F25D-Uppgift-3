@@ -3,13 +3,21 @@ const textWidth = document.getElementById("widthText");
 const colorPicker = document.getElementById("drawColor");
 const widthPicker = document.getElementById("widthRange");
 
-canvas.width = 500;
-canvas.height = 500;
 const context = canvas.getContext("2d");
 let drawing = false;
 let color = colorPicker.value;
 let width = 5;
 widthText.textContent = width;
+
+function resizeCanvas() {
+  const computedStyle = getComputedStyle(canvas);
+  const width = parseInt(computedStyle.width);
+  const height = parseInt(computedStyle.height);
+
+  canvas.width = width;
+  canvas.height = height;
+}
+resizeCanvas();
 
 canvas.addEventListener("mousedown", startDrawing);
 canvas.addEventListener("mouseup", stopDrawing);
@@ -17,7 +25,6 @@ canvas.addEventListener("mousemove", draw);
 
 colorPicker.addEventListener("input", () => {
   color = colorPicker.value;
-  widthText.textContent = width;
 });
 
 widthPicker.addEventListener("input", () => {
@@ -27,7 +34,7 @@ widthPicker.addEventListener("input", () => {
 
 function startDrawing(event) {
   drawing = true;
-  drawing(event);
+  draw(event);
 }
 
 function stopDrawing() {
@@ -37,30 +44,34 @@ function stopDrawing() {
 
 function draw(event) {
   if (!drawing) return;
+
+  const rect = canvas.getBoundingClientRect(); // Get canvas position
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
   context.lineWidth = width;
   context.lineCap = "round";
   context.strokeStyle = color;
 
-  context.lineTo(
-    event.clientX - canvas.offsetLeft,
-    event.clientY - canvas.offsetTop
-  );
+  context.lineTo(x, y);
   context.stroke();
   context.beginPath();
-  context.moveTo(
-    event.clientX - canvas.offsetLeft,
-    event.clientY - canvas.offsetTop
-  );
+  context.moveTo(x, y);
 }
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "r") {
-    color = "red";
-  } else if (event.key === "b") {
-    color = "blue";
-  } else if (event.key === "g") {
-    color = "green";
-  } else if (event.key === "e") {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  }
+const resetCanvas = document.getElementById("resetCanvas");
+resetCanvas.addEventListener("click", () => {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.beginPath();
+});
+
+const saveImage = document.getElementById("saveImage");
+saveImage.addEventListener("click", () => {
+  let imgUrl = canvas.toDataURL("image/png");
+  let downloadTag = document.createElement("a");
+  downloadTag.href = imgUrl;
+  downloadTag.download = "canvas-drawing.png";
+  document.body.appendChild(downloadTag);
+  downloadTag.click();
+  document.body.removeChild(downloadTag);
 });

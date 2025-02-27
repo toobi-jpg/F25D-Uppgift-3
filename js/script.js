@@ -145,11 +145,19 @@ async function getData() {
   return data;
 }
 
+// const readmoreCanvas = document.getElementById("readmoreDrawing");
+// if (window.location.href.includes("index.html")) {
+//   readmoreCanvas.addEventListener("click", () => {
+//     slidecounter++;
+//     window.location.href = "portfolio.html";
+//   });
+// }
+
 const forwardBtn = document.getElementById("arrow-forward");
 const backBtn = document.getElementById("arrow-back");
 const project = document.querySelectorAll(".project-select");
 const dot = document.querySelectorAll(".dot");
-let slidecounter = 0;
+let slidecounter = 1; //Kunde börjat från 0 och sedan lagt till localstorage från index sidan och uppdaterad counter efter "readmore" click på det projekt man trycker på.
 activeProject();
 
 function activeProject() {

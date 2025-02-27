@@ -483,14 +483,6 @@ section div {
   overflow: hidden;
 }
 
-.section-div-background {
-  position: absolute;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
 section h2 {
   color: #cac6c0;
   position: absolute;
@@ -515,14 +507,16 @@ section h2 {
   transition: transform 0.7s ease-in-out;
 }
 
-.card1 {
+.cards {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-size: cover;
   background-position: center;
   border: 1px solid var(--border-color);
 }
 
-/* Kommer lägga till fler projekt till uppgift 3, något projekt jag håller på med och kanske lorem. */
 section div .project-img {
   border-radius: 8px;
   width: 100%;
@@ -530,6 +524,16 @@ section div .project-img {
   object-fit: cover;
   z-index: 1;
   transition: transform 0.8s ease;
+}
+
+#drawing-index-page {
+  border-radius: 8px;
+  width: 70%;
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
+  transition: transform 0.8s ease;
+  margin-bottom: 60px;
 }
 
 section div:hover .project-img {
@@ -540,9 +544,6 @@ section div:hover .cardWaves {
 }
 section div:hover .readmore {
   transform: translateX(140px);
-}
-section div:hover .section-div-background {
-  opacity: 100%;
 }
 
 .readmore {
@@ -996,7 +997,7 @@ form:has(#emailinput:focus) .envelope {
   margin-bottom: 20px;
 }
 
-.project-container-project1 {
+.project-select {
   display: none;
   position: absolute;
   margin: 0;
@@ -1005,6 +1006,10 @@ form:has(#emailinput:focus) .envelope {
   width: 100%;
   height: 100%;
   border: none;
+}
+
+.project-select h2 {
+  text-shadow: 0px 0px 4px var(--text-shadow);
 }
 
 .project-container-project1-rightside {
@@ -1014,27 +1019,170 @@ form:has(#emailinput:focus) .envelope {
   justify-content: flex-start;
   text-align: start;
   align-items: flex-start;
-  padding-top: 20px;
+  padding-top: 30px;
   gap: 20px;
   height: 100%;
+  width: 50%;
   margin: 0;
   color: var(--text-color);
 }
 
-.project-container-project1 p {
-  height: 2rem;
-  word-break: break-word;
+.canvas-container {
+  position: relative;
+  padding: 0;
+  width: 252px;
+  height: 344px;
+  margin: 0;
+  border-radius: 12px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.466);
 }
 
-.project-container-project2 {
-  display: none;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
+.project-container-project2-rightside {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  align-items: flex-start;
+  padding-top: 30px;
+  gap: 20px;
   height: 100%;
-  border: 1px solid rgb(0, 255, 4);
+  width: 50%;
+  margin: 0;
+  color: var(--text-color);
+}
+
+#drawingCanvas {
+  cursor: crosshair;
+  width: 252px;
+  height: 344px;
+  background-color: var(--base-color);
+  border-radius: 12px;
+}
+
+#widthText {
+  color: var(--text-color);
+}
+
+.canvas-controls {
+  position: relative;
+  display: flex;
+  justify-items: center;
+  align-items: flex-start;
+  border: none;
+  width: 100%;
+  height: 30px;
+  margin-left: 0;
+  gap: 10px;
+}
+
+.canvas-controlsTwo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: flex-start;
+  border: none;
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  margin-left: 0;
+  gap: 40px;
+}
+
+#saveImage {
+  left: 8px;
+  bottom: 18px;
+}
+
+#resetCanvas {
+  right: 8px;
+  bottom: 18px;
+}
+
+.canvas-container i {
+  position: absolute;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-left: 1px;
+  color: var(--text-color);
+}
+
+.canvas-container i:hover {
+  color: var(--text-accent);
+}
+
+.project-select p {
+  height: 2rem;
+  word-break: break-word;
+  z-index: 1;
+}
+
+.canvas-p {
+  color: var(--text-accent);
+}
+
+#drawColor {
+  max-width: 25px;
+  min-height: 30px;
+  max-height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  z-index: 1;
+  cursor: pointer;
+}
+
+#widthText {
+  font-family: "Lato", serif;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 5px;
+  margin-top: 4px;
+}
+
+#widthRange {
+  max-height: 20px;
+  z-index: 1;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  max-width: 10rem;
+  min-height: 30px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: var(--text-color);
+  border-radius: 0.5rem;
+  height: 0.2rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  background-color: var(--text-accent);
+  height: 1rem;
+  width: 0.4rem;
+  border-radius: 0.5rem;
+}
+
+.drawingHand {
+  position: absolute;
+  transform: rotate(15deg);
+  width: 300px;
+  opacity: 20%;
+  height: auto;
+  z-index: 0;
 }
 
 .showproject {
@@ -1097,10 +1245,12 @@ form:has(#emailinput:focus) .envelope {
   position: absolute;
   left: 0;
   opacity: 60%;
+  cursor: pointer;
 }
 
 #arrow-forward {
   position: absolute;
   right: 0;
   opacity: 60%;
+  cursor: pointer;
 }
