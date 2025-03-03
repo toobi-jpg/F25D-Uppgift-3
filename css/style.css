@@ -304,11 +304,13 @@ nav img {
   font-size: 20px;
   position: relative;
   display: flex;
+  opacity: 0;
 }
 
 .grid-popup-layout dd {
   margin-top: 10px;
   font-size: 16px;
+  opacity: 0;
 }
 
 dt span {
@@ -317,6 +319,11 @@ dt span {
   margin-left: 10px;
   margin-top: 6px;
   animation: blink 3s infinite;
+}
+
+.listOpacity {
+  opacity: 1 !important;
+  transition: opacity 1.5s ease-in-out;
 }
 
 @keyframes blink {
@@ -981,20 +988,23 @@ form:has(#emailinput:focus) .envelope {
   margin-bottom: 22%;
   height: 540px;
   width: 760px;
+  min-width: 320px;
+  max-height: 800px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
   padding: 15px;
   line-height: 1.4rem;
   color: var(--text-color);
   background: var(--card-gradient);
+  overflow: hidden;
 }
 
 .project-page-project-container {
   position: relative;
   display: flex;
   border: none;
-  margin-left: 40px;
   margin-bottom: 20px;
+  width: 80%;
 }
 
 .project-select {
@@ -1006,6 +1016,19 @@ form:has(#emailinput:focus) .envelope {
   width: 100%;
   height: 100%;
   border: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.showproject {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.opacityApply {
+  opacity: 1;
 }
 
 .project-select h2 {
@@ -1038,6 +1061,7 @@ form:has(#emailinput:focus) .envelope {
 }
 
 .project-container-project2-rightside {
+  position: relative;
   border: none;
   display: flex;
   flex-direction: column;
@@ -1073,7 +1097,6 @@ form:has(#emailinput:focus) .envelope {
   width: 100%;
   height: 30px;
   margin-left: 0;
-  gap: 10px;
 }
 
 .canvas-controlsTwo {
@@ -1119,7 +1142,7 @@ form:has(#emailinput:focus) .envelope {
 }
 
 .canvas-p {
-  color: var(--text-accent);
+  color: var(--text-color);
 }
 
 #drawColor {
@@ -1179,17 +1202,11 @@ input[type="range"]::-webkit-slider-thumb {
 .drawingHand {
   position: absolute;
   transform: rotate(15deg);
-  width: 300px;
-  opacity: 20%;
+  min-width: 100px;
+  max-width: 300px;
   height: auto;
+  opacity: 20%;
   z-index: 0;
-}
-
-.showproject {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
 }
 
 .project-container-slider-dots {
@@ -1235,6 +1252,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .project-page-img-login {
+  min-width: 262px;
   width: 45%;
   height: auto;
   border-radius: 12px;

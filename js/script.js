@@ -79,6 +79,7 @@ if (contactText) {
 
 const cvbtn = document.getElementById("cvbtn");
 const popup = document.getElementById("popup-div-background");
+const popupContainer = document.getElementById("popup-div");
 const closePopup = document.getElementById("close-popup");
 if (cvbtn) {
   cvbtn.addEventListener("click", () => {
@@ -90,6 +91,7 @@ if (cvbtn) {
   });
 }
 
+//Svårt att förstå först med fetch och async / await. Denna är inte helt skriven själv utan tagit hjälp av google med mera och skriven under ett par dagar.
 async function popupData() {
   const cvjson = await getData();
 
@@ -110,6 +112,9 @@ async function popupData() {
       dt.id = `utbildning-text-${index}`;
       dd.id = `utbildning-text-${index}`;
 
+      dt.style.opacity = "0";
+      dd.style.opacity = "0";
+
       utbildningarDl.appendChild(dt);
       utbildningarDl.appendChild(dd);
 
@@ -118,6 +123,11 @@ async function popupData() {
         span.textContent = "Aktiv";
         dt.appendChild(span);
       }
+
+      setTimeout(() => {
+        dt.classList.add("listOpacity");
+        dd.classList.add("listOpacity");
+      }, (cvjson.UTBILDNING.length - index - 1) * 800);
     });
   }
 
@@ -132,8 +142,16 @@ async function popupData() {
       dt.id = `arbete-text-${index}`;
       dd.id = `arbete-text-${index}`;
 
+      dt.style.opacity = "0";
+      dd.style.opacity = "0";
+
       arbeteDl.appendChild(dt);
       arbeteDl.appendChild(dd);
+
+      setTimeout(() => {
+        dt.classList.add("listOpacity");
+        dd.classList.add("listOpacity");
+      }, (cvjson.ARBETSLIVSERFARENHET.length - index - 1) * 800);
     });
   }
 }
@@ -145,40 +163,38 @@ async function getData() {
   return data;
 }
 
-// const readmoreCanvas = document.getElementById("readmoreDrawing");
-// if (window.location.href.includes("index.html")) {
-//   readmoreCanvas.addEventListener("click", () => {
-//     slidecounter++;
-//     window.location.href = "portfolio.html";
-//   });
-// }
-
 const forwardBtn = document.getElementById("arrow-forward");
 const backBtn = document.getElementById("arrow-back");
 const project = document.querySelectorAll(".project-select");
 const dot = document.querySelectorAll(".dot");
 let slidecounter = 1; //Kunde börjat från 0 och sedan lagt till localstorage från index sidan och uppdaterad counter efter "readmore" click på det projekt man trycker på.
-activeProject();
 
-function activeProject() {
-  project.forEach((e) => e.classList.remove("showproject"));
-  project[slidecounter].classList.add("showproject");
-  dot.forEach((e) => e.classList.remove("activedot"));
-  dot[slidecounter].classList.add("activedot");
+if (window.location.href.includes("portfolio.html")) {
+  activeProject();
+  function activeProject() {
+    project.forEach((e) => e.classList.remove("showproject"));
+    project[slidecounter].classList.add("showproject");
+    setTimeout(() => {
+      project.forEach((e) => e.classList.remove("opacityApply"));
+      project[slidecounter].classList.add("opacityApply");
+    }, 200);
+    dot.forEach((e) => e.classList.remove("activedot"));
+    dot[slidecounter].classList.add("activedot");
+  }
+
+  forwardBtn.addEventListener("click", () => {
+    slidecounter++;
+    if (slidecounter >= project.length) {
+      slidecounter = 0;
+    }
+    activeProject();
+  });
+
+  backBtn.addEventListener("click", () => {
+    slidecounter--;
+    if (slidecounter < 0) {
+      slidecounter = project.length - 1;
+    }
+    activeProject();
+  });
 }
-
-forwardBtn.addEventListener("click", () => {
-  slidecounter++;
-  if (slidecounter >= project.length) {
-    slidecounter = 0;
-  }
-  activeProject();
-});
-
-backBtn.addEventListener("click", () => {
-  slidecounter--;
-  if (slidecounter < 0) {
-    slidecounter = project.length - 1;
-  }
-  activeProject();
-});

@@ -1,3 +1,4 @@
+//Projekt gjort i repitition lektionen, något förbättrad och nu implementerad direkt på min sida.
 const canvas = document.getElementById("drawingCanvas");
 const textWidth = document.getElementById("widthText");
 const colorPicker = document.getElementById("drawColor");
@@ -45,7 +46,7 @@ function stopDrawing() {
 function draw(event) {
   if (!drawing) return;
 
-  const rect = canvas.getBoundingClientRect(); // Get canvas position
+  const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
 
@@ -65,6 +66,7 @@ resetCanvas.addEventListener("click", () => {
   context.beginPath();
 });
 
+//Denna är ett personligt tillägg utöver det vi skrev i lektionen.
 const saveImage = document.getElementById("saveImage");
 saveImage.addEventListener("click", () => {
   let imgUrl = canvas.toDataURL("image/png");
