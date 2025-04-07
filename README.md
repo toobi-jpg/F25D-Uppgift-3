@@ -1,3 +1,2 @@
 ﻿# F25D-Uppgift-3
-# Portfolio website by KWL
-# https://toobi-jpg.github.io/
+# First Portfolio website school assignment by KWL
